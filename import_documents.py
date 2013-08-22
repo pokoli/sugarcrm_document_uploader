@@ -4,18 +4,13 @@ import argparse
 import magic
 import os
 import uuid
+from .config import HOST, USER, PASSWD, DB, SUGARDIR
 
 
 parser = argparse.ArgumentParser(description='Import documents to SugarCRM')
 parser.add_argument('directory', metavar='dir', type=str,
     help='directory to import documents')
 args = parser.parse_args()
-
-HOST = "localhost"
-USER = "database_user"
-PASSWD = "database_password"
-DB = "database"
-SUGARDIR = "/var/www/sugarcrm/upload"
 
 db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWD, db=DB)
 cur = db.cursor()

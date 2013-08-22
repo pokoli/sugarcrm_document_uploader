@@ -2,17 +2,13 @@
 import MySQLdb
 import argparse
 import os
+from .config import HOST, USER, PASSWD, DB, SUGARDIR
 
 parser = argparse.ArgumentParser(description='Test documents of SugarCRM')
 parser.add_argument('--remove', type=bool, default=False,
     help='delete documents')
 args = parser.parse_args()
 
-HOST = "localhost"
-USER = "database_user"
-PASSWD = "database_password"
-DB = "database"
-SUGARDIR = "/var/www/sugarcrm/upload"
 
 db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWD, db=DB)
 cur = db.cursor()
