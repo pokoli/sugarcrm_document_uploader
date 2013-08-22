@@ -10,8 +10,9 @@ from .config import HOST, USER, PASSWD, DB, SUGARDIR
 parser = argparse.ArgumentParser(description='Import documents to SugarCRM')
 parser.add_argument('directory', metavar='dir', type=str,
     help='directory to import documents')
-parser.add_argument('--existing', type=bool, default=False,
-    help='skip existing documents (same filename)')
+parser.add_argument('--existing', dest='existing', action='store_true',
+    help='Skip existing documents')
+parser.set_defaults(existing=False)
 args = parser.parse_args()
 
 db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWD, db=DB)
@@ -34,7 +35,7 @@ for root, dirs, files in os.walk(args.directory):
             mime_type = 'text/plain'
 
         try:
-            if not args.existing:
+            if args.existing:
                 cur.execute("SELECT id from documents where document_name = '%s'"
                         % (file))
                 row = cur.fetchone()

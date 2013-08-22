@@ -5,8 +5,8 @@ import os
 from .config import HOST, USER, PASSWD, DB, SUGARDIR
 
 parser = argparse.ArgumentParser(description='Test documents of SugarCRM')
-parser.add_argument('--remove', type=bool, default=False,
-    help='delete documents')
+parser.add_argument('--remove', dest='remove', action='store_true')
+parser.set_defaults(remove=False)
 args = parser.parse_args()
 
 
